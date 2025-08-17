@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prediction Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f0f2f5; }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home_page' %}">🧠 Psycho Predictor</a>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg border-0 text-center">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="mb-0">Prediction Result</h2>
+                    </div>
+                    <div class="card-body p-5">
+                        <p class="fs-5">Based on the provided information, the model predicts that treatment is likely to be sought:</p>
+                        
+                        {% if prediction == 'Yes' %}
+                            <div class="alert alert-danger" role="alert">
+                                <h3 class="alert-heading">Prediction: {{ prediction }}</h3>
+                            </div>
+                            <div class="text-start mt-4">
+                                <h5>What This Means</h5>
+                                <p>The model's prediction suggests a higher likelihood of seeking treatment based on the patterns it learned from the survey data. It's important to remember that reaching out for help is a sign of strength. Maintaining mental wellness is a proactive process, and resources are available to support you.</p>
+                                <h5>Resources</h5>
+                                <p>If you or someone you know is looking for support, consider reaching out to a mental health professional or exploring online resources. (Note: These are sample links.)</p>
+                                <ul>
+                                    <li><a href="#">Find a Therapist Near You</a></li>
+                                    <li><a href="#">Online Mental Health Support</a></li>
+                                </ul>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-success" role="alert">
+                                <h3 class="alert-heading">Prediction: {{ prediction }}</h3>
+                            </div>
+                            <div class="text-start mt-4">
+                                <h5>What This Means</h5>
+                                <p>The model's prediction suggests a lower likelihood of seeking treatment based on the patterns it learned from the survey data. Maintaining mental wellness is an ongoing journey for everyone. It's always a good idea to practice self-care, be mindful of your mental state, and know that support is available if you ever need it.</p>
+                                <h5>Resources</h5>
+                                <p>Staying proactive about mental health is key. Here are some general resources for wellness. (Note: These are sample links.)</p>
+                                <ul>
+                                    <li><a href="#">Wellness and Self-Care Tips</a></li>
+                                    <li><a href="#">Understanding Mental Health</a></li>
+                                </ul>
+                            </div>
+                        {% endif %}
+                        
+                        <hr class="my-4">
+                        <p class="fs-5 mt-4">Model Confidence: <strong>{{ confidence|floatformat:2 }}%</strong></p>
+                        
+                        <a href="{% url 'home_page' %}" class="btn btn-primary btn-lg mt-3">Make Another Prediction</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
